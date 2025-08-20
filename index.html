@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art Fair Calendar</title>
+  <meta name="description" content="Simple, information-only art fair calendar with locations and dates." />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      margin: 0;
+      line-height: 1.5;
+      padding: 2rem;
+    }
+    .container { max-width: 880px; margin: 0 auto; }
+    header { margin-bottom: 1rem; }
+    header p { color: #555; }
+    a { color: inherit; }
+
+    /* Search */
+    .search { display: flex; gap: 0.5rem; align-items: center; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+    .search label { font-weight: 600; }
+    .search input[type="search"] {
+      flex: 1;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: transparent;
+    }
+    .search select {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: transparent;
+    }
+    .search button[type="reset"] {
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: transparent;
+      cursor: pointer;
+    }
+    #resultCount { margin-left: auto; min-width: 5ch; text-align: right; color: #666; }
+
+    /* List */
+    .year { margin-top: 1.5rem; }
+    .month { margin: 1rem 0; }
+    .fairs { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+    .fair {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      background: transparent;
+    }
+    .fair .name { margin: 0 0 0.25rem; font-size: 1.05rem; }
+    .fair .meta { margin: 0; color: #555; }
+    .fair .link { margin: 0.25rem 0 0; }
+    footer { margin-top: 2rem; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Art Fair Calendar</h1>
+      <p>Browse worldwide art fairs and biennials. Use the filters to find a city, country, region, or event type.</p>
+    </header>
+
+    <section aria-label="Quick filter">
+      <form id="searchForm" role="search" class="search">
+        <label for="q">Filter</label>
+        <input id="q" name="q" type="search" placeholder="e.g., Basel, Lagos, Venice, TEFAF" autocomplete="off" />
+        <label for="region">Region</label>
+        <select id="region" name="region">
+          <option value="all">All</option>
+          <option>Africa</option>
+          <option>Asia</option>
+          <option>Europe</option>
+          <option>Middle East</option>
+          <option>North America</option>
+          <option>South America</option>
+          <option>Oceania</option>
+        </select>
+        <label for="type">Type</label>
+        <select id="type" name="type">
+          <option value="all">All</option>
+          <option value="fair">Fair</option>
+          <option value="biennial">Biennial/Triennial</option>
+        </select>
+        <button type="reset" id="clearBtn" aria-label="Clear search">Clear</button>
+        <span id="resultCount" role="status" aria-live="polite"></span>
+      </form>
+    </section>
+
+    <main id="calendar" aria-live="off">
+      <h2 class="year">2025</h2>
+
+      <section class="month">
+        <h3>January</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="North America" data-search="la art show los angeles usa la convention center january jan united states north america">
+            <h4 class="name">LA Art Show</h4>
+            <p class="meta">
+              <span class="location">Los Angeles, USA</span> •
+              <span class="venue">LA Convention Center</span> •
+              <time datetime="2025-01-15">Jan 15</time>–<time datetime="2025-01-19">19</time>
+            </p>
+            <p class="link"><a href="https://www.laartshow.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Oceania" data-search="sydney contemporary sydney australia carraigeworks january jan oceania">
+            <h4 class="name">Sydney Contemporary</h4>
+            <p class="meta"><span class="location">Sydney, Australia</span> • <span class="venue">Carriageworks</span> • <time datetime="2025-01-20">Jan 20</time>–<time datetime="2025-01-22">22</time></p>
+            <p class="link"><a href="https://sydneycontemporary.com.au" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>February</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Europe" data-search="arcomadrid madrid spain ifema february feb europe">
+            <h4 class="name">ARCOmadrid</h4>
+            <p class="meta"><span class="location">Madrid, Spain</span> • <span class="venue">IFEMA</span> • <time datetime="2025-02-07">Feb 7</time>–<time datetime="2025-02-11">11</time></p>
+            <p class="link"><a href="https://www.ifema.es/en/arco-madrid" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Asia" data-search="india art fair new delhi india nsic exhibition grounds february feb south asia">
+            <h4 class="name">India Art Fair</h4>
+            <p class="meta"><span class="location">New Delhi, India</span> • <span class="venue">NSIC Exhibition Grounds</span> • <time datetime="2025-02-08">Feb 8</time>–<time datetime="2025-02-11">11</time></p>
+            <p class="link"><a href="https://indiaartfair.in" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Africa" data-search="1-54 marrakech morocco mamounia la mamounia february feb africa">
+            <h4 class="name">1-54 Marrakech</h4>
+            <p class="meta"><span class="location">Marrakech, Morocco</span> • <span class="venue">La Mamounia</span> • <time datetime="2025-02-22">Feb 22</time>–<time datetime="2025-02-25">25</time></p>
+            <p class="link"><a href="https://www.1-54.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>March</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Europe" data-search="tefaf maastricht netherlands mecc march mar europe">
+            <h4 class="name">TEFAF Maastricht</h4>
+            <p class="meta"><span class="location">Maastricht, Netherlands</span> • <span class="venue">MECC</span> • <time datetime="2025-03-09">Mar 9</time>–<time datetime="2025-03-14">14</time></p>
+            <p class="link"><a href="https://www.tefaf.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="North America" data-search="the armory show new york usa javits center march mar north america united states">
+            <h4 class="name">The Armory Show</h4>
+            <p class="meta"><span class="location">New York, USA</span> • <span class="venue">Javits Center</span> • <time datetime="2025-03-01">Mar 1</time>–<time datetime="2025-03-03">3</time></p>
+            <p class="link"><a href="https://www.thearmoryshow.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Middle East" data-search="art dubai dubai uae united arab emirates madinat jumeirah march mar middle east">
+            <h4 class="name">Art Dubai</h4>
+            <p class="meta"><span class="location">Dubai, UAE</span> • <span class="venue">Madinat Jumeirah</span> • <time datetime="2025-03-10">Mar 10</time>–<time datetime="2025-03-13">13</time></p>
+            <p class="link"><a href="https://www.artdubai.ae" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="biennial" data-region="Oceania" data-search="biennale of sydney sydney australia march mar oceania biennial">
+            <h4 class="name">Biennale of Sydney</h4>
+            <p class="meta"><span class="location">Sydney, Australia</span> • <span class="venue">Multiple Venues</span> • <time datetime="2025-03-01">Mar</time>–<time datetime="2025-06-01">Jun</time></p>
+            <p class="link"><a href="https://www.biennaleofsydney.art" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>April</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Europe" data-search="art brussels brussels belgium brussels expo april apr europe">
+            <h4 class="name">Art Brussels</h4>
+            <p class="meta"><span class="location">Brussels, Belgium</span> • <span class="venue">Brussels Expo</span> • <time datetime="2025-04-25">Apr 25</time>–<time datetime="2025-04-28">28</time></p>
+            <p class="link"><a href="https://www.artbrussels.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="South America" data-search="sp-arte sao paulo brazil bienal pavilion april apr south america">
+            <h4 class="name">SP–Arte</h4>
+            <p class="meta"><span class="location">São Paulo, Brazil</span> • <span class="venue">Bienal Pavilion</span> • <time datetime="2025-04-10">Apr 10</time>–<time datetime="2025-04-14">14</time></p>
+            <p class="link"><a href="https://www.sp-arte.com/en/" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="North America" data-search="expo chicago chicago usa navy pier april apr north america united states">
+            <h4 class="name">EXPO CHICAGO</h4>
+            <p class="meta"><span class="location">Chicago, USA</span> • <span class="venue">Navy Pier</span> • <time datetime="2025-04-11">Apr 11</time>–<time datetime="2025-04-14">14</time></p>
+            <p class="link"><a href="https://www.expochicago.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>May</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="North America" data-search="frieze new york usa the shed may north america united states">
+            <h4 class="name">Frieze New York</h4>
+            <p class="meta"><span class="location">New York, USA</span> • <span class="venue">The Shed</span> • <time datetime="2025-05-01">May 1</time>–<time datetime="2025-05-05">5</time></p>
+            <p class="link"><a href="https://www.frieze.com/fairs/frieze-new-york" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="biennial" data-region="Africa" data-search="dakar biennale dak'art dakar senegal may june africa biennial contemporary art">
+            <h4 class="name">Dakar Biennale (Dak'Art)</h4>
+            <p class="meta"><span class="location">Dakar, Senegal</span> • <span class="venue">Multiple Venues</span> • <time datetime="2025-05-15">May</time>–<time datetime="2025-06-15">Jun</time></p>
+            <p class="link"><a href="https://www.biennaledakar.org" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="biennial" data-region="Europe" data-search="venice biennale biennale di venezia venice italy giardini arsenale may europe biennial">
+            <h4 class="name">Venice Biennale</h4>
+            <p class="meta"><span class="location">Venice, Italy</span> • <span class="venue">Giardini & Arsenale</span> • <time datetime="2025-04-20">Apr</time>–<time datetime="2025-11-24">Nov</time></p>
+            <p class="link"><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>June</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Europe" data-search="art basel basel switzerland messe basel june jun europe">
+            <h4 class="name">Art Basel</h4>
+            <p class="meta"><span class="location">Basel, Switzerland</span> • <span class="venue">Messe Basel</span> • <time datetime="2025-06-13">Jun 13</time>–<time datetime="2025-06-16">16</time></p>
+            <p class="link"><a href="https://www.artbasel.com/basel" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Africa" data-search="investec cape town art fair cape town south africa cticc june africa">
+            <h4 class="name">Investec Cape Town Art Fair</h4>
+            <p class="meta"><span class="location">Cape Town, South Africa</span> • <span class="venue">CTICC</span> • <time datetime="2025-06-20">Jun 20</time>–<time datetime="2025-06-23">23</time></p>
+            <p class="link"><a href="https://www.investeccapetownartfair.co.za" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>September</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Africa" data-search="fnb art joburg johannesburg south africa sandton convention centre september sep africa">
+            <h4 class="name">FNB Art Joburg</h4>
+            <p class="meta"><span class="location">Johannesburg, South Africa</span> • <span class="venue">Sandton Convention Centre</span> • <time datetime="2025-09-06">Sep 6</time>–<time datetime="2025-09-08">8</time></p>
+            <p class="link"><a href="https://www.artjoburg.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="biennial" data-region="Asia" data-search="gwangju biennale gwangju south korea september nov asia biennial">
+            <h4 class="name">Gwangju Biennale</h4>
+            <p class="meta"><span class="location">Gwangju, South Korea</span> • <span class="venue">Biennale Hall & City Venues</span> • <time datetime="2025-09-05">Sep</time>–<time datetime="2025-11-10">Nov</time></p>
+            <p class="link"><a href="https://www.gwangjubiennale.org" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="biennial" data-region="Europe" data-search="istanbul biennial istanbul turkey september nov europe biennial">
+            <h4 class="name">Istanbul Biennial</h4>
+            <p class="meta"><span class="location">Istanbul, Turkey</span> • <span class="venue">Multiple Venues</span> • <time datetime="2025-09-15">Sep</time>–<time datetime="2025-11-15">Nov</time></p>
+            <p class="link"><a href="https://bienal.iksv.org/en" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Oceania" data-search="sydney contemporary sydney australia carriageworks september sep oceania">
+            <h4 class="name">Sydney Contemporary</h4>
+            <p class="meta"><span class="location">Sydney, Australia</span> • <span class="venue">Carriageworks</span> • <time datetime="2025-09-10">Sep 10</time>–<time datetime="2025-09-13">13</time></p>
+            <p class="link"><a href="https://sydneycontemporary.com.au" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>October</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Europe" data-search="frieze london united kingdom uk regent's park october oct europe">
+            <h4 class="name">Frieze London</h4>
+            <p class="meta"><span class="location">London, UK</span> • <span class="venue">Regent's Park</span> • <time datetime="2025-10-11">Oct 11</time>–<time datetime="2025-10-15">15</time></p>
+            <p class="link"><a href="https://www.frieze.com/fairs/frieze-london" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Europe" data-search="paris+ par art basel paris france grand palais ephémère october oct europe">
+            <h4 class="name">Paris+ par Art Basel</h4>
+            <p class="meta"><span class="location">Paris, France</span> • <span class="venue">Grand Palais Éphémère</span> • <time datetime="2025-10-20">Oct 20</time>–<time datetime="2025-10-23">23</time></p>
+            <p class="link"><a href="https://parisplus.artbasel.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Europe" data-search="1-54 london somerset house united kingdom uk october oct europe">
+            <h4 class="name">1-54 London</h4>
+            <p class="meta"><span class="location">London, UK</span> • <span class="venue">Somerset House</span> • <time datetime="2025-10-10">Oct 10</time>–<time datetime="2025-10-13">13</time></p>
+            <p class="link"><a href="https://www.1-54.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>November</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="Africa" data-search="art x lagos lagos nigeria federal palace november nov africa">
+            <h4 class="name">ART X Lagos</h4>
+            <p class="meta"><span class="location">Lagos, Nigeria</span> • <span class="venue">Federal Palace</span> • <time datetime="2025-11-01">Nov 1</time>–<time datetime="2025-11-03">3</time></p>
+            <p class="link"><a href="https://artxlagos.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Middle East" data-search="abu dhabi art abu dhabi uae united arab emirates manarat al saadiyat november nov middle east">
+            <h4 class="name">Abu Dhabi Art</h4>
+            <p class="meta"><span class="location">Abu Dhabi, UAE</span> • <span class="venue">Manarat Al Saadiyat</span> • <time datetime="2025-11-20">Nov 20</time>–<time datetime="2025-11-24">24</time></p>
+            <p class="link"><a href="https://www.abudhabiart.ae" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Europe" data-search="paris photo paris france grand palais ephémère november nov europe photography">
+            <h4 class="name">Paris Photo</h4>
+            <p class="meta"><span class="location">Paris, France</span> • <span class="venue">Grand Palais Éphémère</span> • <time datetime="2025-11-07">Nov 7</time>–<time datetime="2025-11-10">10</time></p>
+            <p class="link"><a href="https://www.parisphoto.com" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+          <li class="fair" data-type="fair" data-region="Oceania" data-search="aotearoa art fair auckland new zealand the cloud november nov oceania">
+            <h4 class="name">Aotearoa Art Fair</h4>
+            <p class="meta"><span class="location">Auckland, New Zealand</span> • <span class="venue">The Cloud</span> • <time datetime="2025-11-21">Nov 21</time>–<time datetime="2025-11-24">24</time></p>
+            <p class="link"><a href="https://www.aotearoaartfair.co.nz" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="month">
+        <h3>December</h3>
+        <ul class="fairs">
+          <li class="fair" data-type="fair" data-region="North America" data-search="art basel miami beach usa miami convention center december dec north america united states">
+            <h4 class="name">Art Basel Miami Beach</h4>
+            <p class="meta"><span class="location">Miami Beach, USA</span> • <span class="venue">Miami Beach Convention Center</span> • <time datetime="2025-12-05">Dec 5</time>–<time datetime="2025-12-08">8</time></p>
+            <p class="link"><a href="https://www.artbasel.com/miami-beach" target="_blank" rel="noopener noreferrer">Website</a></p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>&copy; <span id="year"></span></small>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const input = document.getElementById('q');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultCount = document.getElementById('resultCount');
+    const fairs = Array.from(document.querySelectorAll('.fair'));
+    const regionSelect = document.getElementById('region');
+    const typeSelect = document.getElementById('type');
+
+    function normalize(text) {
+      return text.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function updateResults() {
+      const q = normalize(input.value.trim());
+      const region = regionSelect ? regionSelect.value : 'all';
+      const type = typeSelect ? typeSelect.value : 'all';
+      let visible = 0;
+      fairs.forEach((item) => {
+        const hay = normalize(item.dataset.search || item.textContent || '');
+        const itemRegion = (item.dataset.region || '').toLowerCase();
+        const itemType = (item.dataset.type || '').toLowerCase();
+        const queryOk = q === '' || hay.includes(q);
+        const regionOk = region === 'all' || itemRegion === region.toLowerCase();
+        const typeOk = type === 'all' || itemType === type.toLowerCase();
+        const show = queryOk && regionOk && typeOk;
+        item.style.display = show ? '' : 'none';
+        if (show) visible += 1;
+      });
+      if (resultCount) {
+        const filtersActive = (input.value.trim() !== '') || (region !== 'all') || (type !== 'all');
+        resultCount.textContent = filtersActive ? (visible + ' event' + (visible === 1 ? '' : 's')) : '';
+      }
+    }
+
+    if (input) input.addEventListener('input', updateResults);
+    if (regionSelect) regionSelect.addEventListener('change', updateResults);
+    if (typeSelect) typeSelect.addEventListener('change', updateResults);
+    updateResults();
+    if (clearBtn && input) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        if (regionSelect) regionSelect.value = 'all';
+        if (typeSelect) typeSelect.value = 'all';
+        updateResults();
+        input.focus();
+      });
+    }
+  </script>
+</body>
+</html>
