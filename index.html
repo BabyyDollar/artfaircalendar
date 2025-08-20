@@ -1,21 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art Fair Calendar</title>
   <meta name="description" content="Simple, information-only art fair calendar with locations and dates." />
   <style>
-    :root { color-scheme: light dark; }
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a; /* slate-900 */
+      --muted: #334155; /* slate-700 */
+      --border: #e2e8f0; /* slate-200 */
+      --card-bg: #ffffff;
+      --accent: #0ea5e9; /* sky-500 */
+      --shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.06);
+      color-scheme: light;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1220;
+      --text: #f1f5f9; /* slate-100 */
+      --muted: #cbd5e1; /* slate-300 */
+      --border: #1f2937; /* slate-800 */
+      --card-bg: #111827; /* gray-900 */
+      --accent: #38bdf8; /* sky-400 */
+      --shadow: none;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       margin: 0;
-      line-height: 1.5;
+      line-height: 1.65;
       padding: 2rem;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
     .container { max-width: 880px; margin: 0 auto; }
     header { margin-bottom: 1rem; }
-    header p { color: #555; }
+    header p { color: var(--muted); }
     a { color: inherit; }
 
     /* Search */
@@ -24,43 +48,76 @@
     .search input[type="search"] {
       flex: 1;
       padding: 0.6rem 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card-bg);
     }
     .search select {
       padding: 0.6rem 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card-bg);
     }
     .search button[type="reset"] {
       padding: 0.6rem 0.9rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      background: transparent;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       cursor: pointer;
     }
-    #resultCount { margin-left: auto; min-width: 5ch; text-align: right; color: #666; }
+    #resultCount { margin-left: auto; min-width: 5ch; text-align: right; color: var(--muted); }
 
     /* List */
     .year { margin-top: 1.5rem; }
     .month { margin: 1rem 0; }
-    .fairs { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+    .fairs { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
     .fair {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 0.9rem 1rem;
-      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
     }
-    .fair .name { margin: 0 0 0.25rem; font-size: 1.05rem; }
-    .fair .meta { margin: 0; color: #555; }
+    .fair .name { margin: 0 0 0.25rem; font-size: 1.1rem; font-weight: 700; }
+    .fair .meta { margin: 0; color: var(--muted); }
     .fair .link { margin: 0.25rem 0 0; }
-    footer { margin-top: 2rem; color: #666; }
+    .fair .link a { color: var(--accent); text-decoration: underline; }
+    footer { margin-top: 2rem; color: var(--muted); }
+
+    /* Left-side theme toggle */
+    .theme-toggle { position: fixed; left: 12px; top: 50%; transform: translateY(-50%); z-index: 10; }
+    .theme-toggle button {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+      box-shadow: var(--shadow); cursor: pointer;
+    }
+    .theme-toggle button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .theme-toggle .label { position: absolute; left: 56px; background: var(--card-bg); color: var(--text); border: 1px solid var(--border); padding: 6px 10px; border-radius: 10px; white-space: nowrap; box-shadow: var(--shadow); }
+
+    /* Better mobile spacing and readability */
+    @media (max-width: 640px) {
+      body { padding: 1rem; font-size: clamp(16px, 3.2vw, 18px); }
+      .theme-toggle { left: 10px; top: auto; bottom: 14px; transform: none; }
+      .theme-toggle .label { display: none; }
+    }
+
+    /* Focus styles for interactive elements */
+    input, select, button, a { outline: none; }
+    input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="theme-toggle" aria-label="Theme switcher">
+      <button id="themeBtn" type="button" aria-live="polite" aria-label="Switch theme">
+        <span id="themeIcon" aria-hidden="true">☀️</span>
+        <span class="label" id="themeLabel">Light</span>
+      </button>
+    </div>
     <header>
       <h1>Art Fair Calendar</h1>
       <p>Browse worldwide art fairs and biennials. Use the filters to find a city, country, region, or event type.</p>
@@ -313,6 +370,36 @@
   <script>
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Theme handling
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      if (themeIcon) themeIcon.textContent = isDark ? '🌙' : '☀️';
+      if (themeLabel) themeLabel.textContent = isDark ? 'Dark' : 'Light';
+      try { localStorage.setItem('theme', theme); } catch (_) {}
+    }
+
+    function detectInitialTheme() {
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') return saved;
+      } catch (_) {}
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    applyTheme(detectInitialTheme());
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    }
 
     const input = document.getElementById('q');
     const clearBtn = document.getElementById('clearBtn');
